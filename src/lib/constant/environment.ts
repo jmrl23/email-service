@@ -2,7 +2,9 @@ import env from 'env-var';
 
 export const NODE_ENV = env.get('NODE_ENV').default('development').asString();
 
-export const HOST = env.get('HOST').asString();
+export const HOSTNAME = env.get('HOSTNAME').default('localhost').asString();
+
+export const SERVER_URL = env.get('SERVER_URL').asString();
 
 export const PORT = env.get('PORT').default(3002).asPortNumber();
 

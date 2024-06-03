@@ -1,11 +1,11 @@
 import './init';
-import { HOST, PORT } from './lib/constant/environment';
+import { HOSTNAME, PORT } from './lib/constant/environment';
 import app from './app';
 import detectPort from 'detect-port';
 import logger from './lib/util/logger';
 
 async function main() {
-  const host = HOST;
+  const host = HOSTNAME;
   const port = await detectPort(PORT);
 
   app.listen(
