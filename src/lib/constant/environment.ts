@@ -2,6 +2,8 @@ import env from 'env-var';
 
 export const NODE_ENV = env.get('NODE_ENV').default('development').asString();
 
+export const HOST = env.get('HOST').asString();
+
 export const PORT = env.get('PORT').default(3002).asPortNumber();
 
 export const AUTHORIZATION_KEY = env
