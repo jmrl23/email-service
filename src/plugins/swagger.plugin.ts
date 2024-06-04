@@ -1,12 +1,13 @@
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 import fastifyPlugin from 'fastify-plugin';
+import type { OpenAPIV3_1 } from 'openapi-types';
 import { SERVER_URL } from '../lib/constant/environment';
 
 export default fastifyPlugin(async function swaggerPlugin(app) {
-  const servers = [
+  const servers: OpenAPIV3_1.ServerObject[] = [
     {
-      url: 'http://localhost:3002',
+      url: 'http://localhost:3001',
       description: 'Default local development server',
     },
   ];
@@ -14,16 +15,16 @@ export default fastifyPlugin(async function swaggerPlugin(app) {
   if (SERVER_URL) {
     servers.unshift({
       url: SERVER_URL,
-      description: 'Server URL',
+      description: 'Production server',
     });
   }
 
   app.register(fastifySwagger, {
     openapi: {
       info: {
-        title: 'Email API',
+        title: 'App API',
         version: '1.0.0',
-        description: 'Microservice docs',
+        description: 'App API docs',
       },
       servers,
       components: {

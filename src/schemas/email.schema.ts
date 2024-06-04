@@ -1,17 +1,19 @@
-import { asJsonSchema } from '../../lib/util/fastify/typings';
+import { SMTP_TRANSPORT_USER } from '../lib/constant/environment';
+import { asJsonSchema } from '../lib/util/fastify/typings';
 
-export default asJsonSchema({
+export const emailSendSchema = asJsonSchema({
   type: 'object',
+  description: 'Send email',
   additionalProperties: false,
   required: ['from', 'subject'],
   properties: {
     from: {
       type: 'string',
-      examples: ['john@example.com', 'john <john@example.com>'],
+      examples: [`Example <${SMTP_TRANSPORT_USER}>`],
     },
     subject: {
       type: 'string',
-      examples: ['hello world'],
+      examples: ['example'],
     },
     to: {
       type: 'array',

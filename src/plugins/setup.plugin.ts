@@ -8,8 +8,6 @@ import logger from '../lib/util/logger';
 import swaggerPlugin from './swagger.plugin';
 import routesPlugin from './routes.plugin';
 import morganMiddleware from '../middlewares/morgan.middleware';
-import authorizationPlugin from './authorization.plugin';
-import servicesPlugin from './services.plugin';
 
 export default fastifyPlugin(async function setupPlugin(app) {
   await app.register(fastifyCors, {
@@ -38,8 +36,6 @@ export default fastifyPlugin(async function setupPlugin(app) {
       }
     },
   });
-
-  await app.register(servicesPlugin, { prefix: '/' });
 
   await app.register(fastifyMiddie);
 
