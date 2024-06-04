@@ -1,6 +1,7 @@
 import type { FromSchema } from 'json-schema-to-ts';
 import { asRoute } from '../lib/util/fastify/typings';
 import { emailSendSchema } from '../schemas/email.schema';
+import authorizationPlugin from '../plugins/authorization.plugin';
 import EmailService from '../services/email.service';
 import oauth2Client from '../lib/oauth2Client';
 import {
@@ -14,6 +15,8 @@ import {
 } from '../lib/constant/environment';
 
 export default asRoute(async function appRoute(app) {
+  await app.register(authorizationPlugin);
+
   oauth2Client.setCredentials({
     refresh_token: GOOGLE_REFRESH_TOKEN,
   });
