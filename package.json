@@ -42,7 +42,6 @@
     "env-var": "^7.4.2",
     "fastify": "^4.27.0",
     "fastify-plugin": "^4.5.1",
-    "googleapis": "^137.1.0",
     "http-errors": "^2.0.0",
     "json-schema-to-ts": "^3.1.0",
     "morgan": "^1.10.0",

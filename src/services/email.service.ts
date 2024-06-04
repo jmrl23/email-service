@@ -3,7 +3,7 @@ import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 export default class EmailService {
   private constructor(
-    private readonly transporter: Transporter<SMTPTransport.SentMessageInfo>,
+    private transporter: Transporter<SMTPTransport.SentMessageInfo>,
   ) {}
 
   public static async createInstance(
@@ -15,7 +15,7 @@ export default class EmailService {
     return instance;
   }
 
-  async send(
+  public async send(
     options: SMTPTransport.MailOptions,
   ): Promise<SMTPTransport.SentMessageInfo> {
     const data = await this.transporter.sendMail(options);

@@ -13,7 +13,7 @@ export const emailSendSchema = asJsonSchema({
     },
     subject: {
       type: 'string',
-      examples: ['example'],
+      examples: ['example email'],
     },
     to: {
       type: 'array',

@@ -3,7 +3,6 @@ import { asRoute } from '../lib/util/fastify/typings';
 import { emailSendSchema } from '../schemas/email.schema';
 import authorizationPlugin from '../plugins/authorization.plugin';
 import EmailService from '../services/email.service';
-import oauth2Client from '../lib/oauth2Client';
 import {
   GOOGLE_REFRESH_TOKEN,
   SMTP_TRANSPORT_HOST,
@@ -17,11 +16,6 @@ import {
 export default asRoute(async function appRoute(app) {
   await app.register(authorizationPlugin);
 
-  oauth2Client.setCredentials({
-    refresh_token: GOOGLE_REFRESH_TOKEN,
-  });
-
-  const accessToken = await oauth2Client.getAccessToken();
   const emailService = await EmailService.createInstance({
     host: SMTP_TRANSPORT_HOST,
     port: SMTP_TRANSPORT_PORT,
@@ -32,7 +26,6 @@ export default asRoute(async function appRoute(app) {
       clientId: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
       refreshToken: GOOGLE_REFRESH_TOKEN,
-      accessToken: accessToken.token ?? '',
     },
   });
 
