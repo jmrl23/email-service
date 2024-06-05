@@ -14,8 +14,8 @@ export default async function authorizationPreHandler(request: FastifyRequest) {
       `/authenticate?token=${encodeURIComponent(token)}`,
     );
     const data = response.data;
-    if (!data.authorized) {
-      throw new Unauthorized(authErrorMessage(data.reason));
+    if (!data.status.valid) {
+      throw new Unauthorized(authErrorMessage(data.status.message));
     }
     return;
   } catch (error) {
@@ -40,8 +40,10 @@ function apiErrorMessage(apiName: string): (message?: string) => string {
 }
 
 interface ApiResponseData {
-  authorized: boolean;
-  reason?: string;
+  status: {
+    valid: boolean;
+    message?: string;
+  };
 }
 
 interface ApiResponseError {

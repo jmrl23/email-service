@@ -22,7 +22,7 @@ export default fastifyPlugin(async function swaggerPlugin(app) {
   app.register(fastifySwagger, {
     openapi: {
       info: {
-        title: 'Email API',
+        title: 'Email service',
         version: '1.0.0',
       },
       servers,
