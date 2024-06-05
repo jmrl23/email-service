@@ -39,9 +39,9 @@ export const emailSendResponseSchema = asJsonSchema({
   type: 'object',
   description: 'Send email',
   additionalProperties: false,
-  required: ['message_id', 'accepted'],
+  required: ['messageId', 'accepted'],
   properties: {
-    message_id: {
+    messageId: {
       type: 'string',
     },
     accepted: {

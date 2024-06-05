@@ -22,7 +22,7 @@ export default class EmailService {
   ): Promise<FromSchema<typeof emailSendResponseSchema>> {
     const response = await this.transporter.sendMail(options);
     const data = {
-      message_id: response.messageId,
+      messageId: response.messageId,
       accepted: response.accepted.map((value) =>
         typeof value === 'string' ? value : value.address,
       ),
