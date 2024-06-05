@@ -1,7 +1,6 @@
 import type { FromSchema } from 'json-schema-to-ts';
 import { asRoute } from '../lib/util/fastify/typings';
 import { emailSendSchema } from '../schemas/email.schema';
-import authorizationPlugin from '../plugins/authorization.plugin';
 import EmailService from '../services/email.service';
 import {
   GOOGLE_REFRESH_TOKEN,
@@ -12,10 +11,9 @@ import {
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
 } from '../lib/constant/environment';
+import authorizationPreHandler from '../handlers/authorization.prehandler';
 
 export default asRoute(async function appRoute(app) {
-  await app.register(authorizationPlugin);
-
   const emailService = await EmailService.createInstance({
     host: SMTP_TRANSPORT_HOST,
     port: SMTP_TRANSPORT_PORT,
@@ -32,6 +30,7 @@ export default asRoute(async function appRoute(app) {
   app.post(
     '/send',
     {
+      preHandler: [authorizationPreHandler],
       schema: {
         tags: ['email'],
         description: emailSendSchema.description,
