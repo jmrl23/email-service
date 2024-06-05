@@ -8,8 +8,8 @@ export const SERVER_URL = env.get('SERVER_URL').asString();
 
 export const PORT = env.get('PORT').default(3001).asPortNumber();
 
-export const AUTHENTICATION_SERVICE_URL = env
-  .get('AUTHENTICATION_SERVICE_URL')
+export const AUTHORIZATION_SERVICE_URL = env
+  .get('AUTHORIZATION_SERVICE_URL')
   .required()
   .asUrlString();
 

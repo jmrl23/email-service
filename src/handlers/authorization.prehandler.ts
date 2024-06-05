@@ -1,6 +1,6 @@
 import type { FastifyRequest } from 'fastify';
 import { Unauthorized, HttpError } from 'http-errors';
-import { authenticationApi } from '../lib/api';
+import { authorizationApi } from '../lib/api';
 import { AxiosError } from 'axios';
 
 export default async function authorizationPreHandler(request: FastifyRequest) {
@@ -10,7 +10,7 @@ export default async function authorizationPreHandler(request: FastifyRequest) {
   }
 
   try {
-    const response = await authenticationApi.get<ApiResponseData>(
+    const response = await authorizationApi.get<ApiResponseData>(
       `/authenticate?token=${encodeURIComponent(token)}`,
     );
     const data = response.data;

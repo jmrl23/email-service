@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { AUTHENTICATION_SERVICE_URL } from './constant/environment';
+import { AUTHORIZATION_SERVICE_URL } from './constant/environment';
 
-export const authenticationApi = axios.create({
+export const authorizationApi = axios.create({
+  baseURL: AUTHORIZATION_SERVICE_URL,
   headers: {},
-  baseURL: AUTHENTICATION_SERVICE_URL,
 });
