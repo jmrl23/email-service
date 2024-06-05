@@ -4,11 +4,10 @@ import { authorizationApi } from '../lib/api';
 import { AxiosError } from 'axios';
 
 export default async function authorizationPreHandler(request: FastifyRequest) {
-  const [scheme, token] = request.headers.authorization?.split(' ') ?? [];
-  if (scheme !== 'Bearer') {
-    throw new Unauthorized('[Authorization] Invalid scheme');
-  }
-
+  const authorizationHeader = request.headers.authorization;
+  if (!authorizationHeader) throw new Unauthorized();
+  const [scheme, token] = authorizationHeader.split(' ');
+  if (scheme !== 'Bearer') throw new Unauthorized();
   try {
     const response = await authorizationApi.get<ApiResponseData>(
       `/authenticate?token=${encodeURIComponent(token)}`,
