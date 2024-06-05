@@ -1,6 +1,9 @@
 import type { FromSchema } from 'json-schema-to-ts';
 import { asRoute } from '../lib/util/fastify/typings';
-import { emailSendSchema } from '../schemas/email.schema';
+import {
+  emailSendResponseSchema,
+  emailSendSchema,
+} from '../schemas/email.schema';
 import EmailService from '../services/email.service';
 import {
   GOOGLE_REFRESH_TOKEN,
@@ -35,12 +38,15 @@ export default asRoute(async function appRoute(app) {
         tags: ['email'],
         description: emailSendSchema.description,
         body: emailSendSchema,
+        response: {
+          '200': emailSendResponseSchema,
+        },
       },
     },
     async function (request) {
       const payload = request.body as FromSchema<typeof emailSendSchema>;
       const data = await emailService.send(payload);
-      return { data };
+      return data;
     },
   );
 });

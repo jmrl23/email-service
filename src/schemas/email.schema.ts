@@ -34,3 +34,21 @@ export const emailSendSchema = asJsonSchema({
     },
   },
 } as const);
+
+export const emailSendResponseSchema = asJsonSchema({
+  type: 'object',
+  description: 'Send email',
+  additionalProperties: false,
+  required: ['message_id', 'accepted'],
+  properties: {
+    message_id: {
+      type: 'string',
+    },
+    accepted: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+  },
+} as const);

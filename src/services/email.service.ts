@@ -1,5 +1,7 @@
+import type { FromSchema } from 'json-schema-to-ts';
 import { createTransport, type Transporter } from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
+import { emailSendResponseSchema } from '../schemas/email.schema';
 
 export default class EmailService {
   private constructor(
@@ -17,8 +19,14 @@ export default class EmailService {
 
   public async send(
     options: SMTPTransport.MailOptions,
-  ): Promise<SMTPTransport.SentMessageInfo> {
-    const data = await this.transporter.sendMail(options);
+  ): Promise<FromSchema<typeof emailSendResponseSchema>> {
+    const response = await this.transporter.sendMail(options);
+    const data = {
+      message_id: response.messageId,
+      accepted: response.accepted.map((value) =>
+        typeof value === 'string' ? value : value.address,
+      ),
+    };
     return data;
   }
 }
