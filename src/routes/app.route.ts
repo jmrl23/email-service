@@ -1,5 +1,5 @@
 import type { FromSchema } from 'json-schema-to-ts';
-import { asRoute } from '../lib/typings';
+import { asRoute } from '../lib/util/typings';
 import {
   emailSendResponseSchema,
   emailSendSchema,

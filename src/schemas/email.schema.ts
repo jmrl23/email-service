@@ -1,5 +1,5 @@
 import { SMTP_TRANSPORT_USER } from '../lib/constant/environment';
-import { asJsonSchema } from '../lib/typings';
+import { asJsonSchema } from '../lib/util/typings';
 
 export const emailSendSchema = asJsonSchema({
   type: 'object',

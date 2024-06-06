@@ -13,9 +13,8 @@ export default async function authorizationPreHandler(request: FastifyRequest) {
       `/authenticate?token=${encodeURIComponent(token)}`,
     );
     const data = response.data;
-    if (!data.status.valid) {
+    if (!data.status.valid)
       throw new Unauthorized(authErrorMessage(data.status.message));
-    }
     return;
   } catch (error) {
     if (error instanceof AxiosError) {
